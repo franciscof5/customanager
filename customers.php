@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html>
 <?php
 @include("header.php");
 ?>
  
-<body>
-	<div class="container" style="margin-top:80px;">
+	
 	<?php
-		include "navbar.php";
-		include 'database.php';
-		//@include("database.php");
-		//require 'database.php';
-	?>
-
-	<?php
-		global $logado;
-		//if($logado);
-		//não implementado
 		
- 
 		    if ( !empty($_POST)) {
 		    	
 		        // keep track validation errors

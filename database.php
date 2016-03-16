@@ -23,7 +23,7 @@ class Database
         }
         catch(PDOException $e)
         {
-          die($e->getMessage()); 
+          return ($e->getMessage()); 
         }
        }
        return self::$cont;

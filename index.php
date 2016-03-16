@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<script src="js/bootstrap.min.js"></script>
-</head>
+<?php
+@include("header.php");
+?>
  
-<body>
-	<?php
-		@include("navbar.php");
-	?>
-	<?php
-		global $logado;
-		if($logado);
-		//não implementado
-	?>
 	<div class="container" style="margin-top:80px;">
+	<?php
+		include "navbar.php";
+	?>
 			<h4>Acesso restrito</h4>
 			<p>Favor colocar usuário e senha</p>
 	</div> <!-- /container -->
