@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>CUSTOMANAGER</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-</head>
+<?php
+@include("header.php");
+?>
  
 <body>
 	<div class="container" style="margin-top:80px;">
 	<?php
-		@include("navbar.php");
+		include "navbar.php";
 		include 'database.php';
 		//@include("database.php");
 		//require 'database.php';
 	?>
+
 	<?php
 		global $logado;
 		//if($logado);
@@ -87,10 +84,40 @@
 			 //btn-success
 				$( "#row-adc" ).slideToggle( "slow", function() {
 				    // Animation complete.
+				    $ ( "#input_name" ).val("");
+		    		$ ( "#input_email" ).val("");
+		    		$ ( "#input_mobile" ).val("");
 				});
 
 			});
 
+		    $("[rel='tooltip']").tooltip();
+
+		    //
+		    $(".btn-customer-delete").click(function(){
+		        bootbox.confirm("Tem certeza que deseja remover esse cliente?", function(result) {
+				  if(result) {
+				  	bootbox.alert("Cliente removido com sucesso!"); 
+				  }
+				}); 
+		    });
+		    $(".btn-customer-edit").click(function(){
+		    	var nomedb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_nome").text();
+		    	var emaildb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_email").text();
+		    	var telefonedb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_telefone").text();
+		    	$( "#row-adc" ).slideDown( "slow", function() {
+		    		$ ( "#input_name" ).val(nomedb);
+		    		$ ( "#input_email" ).val(emaildb);
+		    		$ ( "#input_mobile" ).val(telefonedb);
+		    	});
+
+		    	//if(("#adc-btn" ).text!="CANCELAR")
+		    	//$("#adc-btn" ).text="CANCELAR";
+		    		
+		    	$( "#adc-btn" ).text(function(i, text){
+		          return "CANCELAR";
+		      	});
+		    });
 		});
 	</script>
 
@@ -106,7 +133,7 @@
 			 <div class="form-group col-md-4">
 			   <label for="name">NOME</label>
 			   <div class="controls">
-                    <input name="name" type="text"  placeholder="Nome" value="<?php echo !empty($name)?$name:'';?>">
+                    <input id="input_name" name="name" type="text"  placeholder="Nome" value="<?php echo !empty($name)?$name:'';?>">
                     <?php if (!empty($nameError)): ?>
                         <span class="help-inline"><?php echo $nameError;?></span>
                     <?php endif; ?>
@@ -116,7 +143,7 @@
 			 <div class="form-group col-md-4">
 			   <label for="email">EMAIL</label>
 			  	<div class="controls">
-                    <input name="email" type="text" placeholder="Email" value="<?php echo !empty($email)?$email:'';?>">
+                    <input id="input_email" name="email" type="text" placeholder="Email" value="<?php echo !empty($email)?$email:'';?>">
                     <?php if (!empty($emailError)): ?>
                         <span class="help-inline"><?php echo $emailError;?></span>
                     <?php endif;?>
@@ -126,7 +153,7 @@
 			 <div class="form-group col-md-4">
 			   <label for="mobile">TELEFONE</label>
 			   <div class="controls">
-                    <input name="mobile" type="text"  placeholder="Telefone" value="<?php echo !empty($mobile)?$mobile:'';?>">
+                    <input id="input_mobile" name="mobile" type="text"  placeholder="Telefone" value="<?php echo !empty($mobile)?$mobile:'';?>">
                     <?php if (!empty($mobileError)): ?>
                         <span class="help-inline"><?php echo $mobileError;?></span>
                     <?php endif;?>
@@ -149,7 +176,7 @@
 				  <th>EMAIL</th>
 				  <th>TELEFONE</th>
 				  <th>PEDIDOS</th>
-				  <th>ACTION</th>
+				  <th>AÇÕES</th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -159,12 +186,23 @@
 			   $sql = 'SELECT * FROM customers ';
 			   foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
-						echo '<td>'. $row['clien_id'] . '</td>';
-						echo '<td>'. $row['clien_nome'] . '</td>';
-						echo '<td>'. $row['clien_email'] . '</td>';
-						echo '<td>'. $row['clien_telefone'] . '</td>';
+						echo '<td class="cust_db_id">'. $row['clien_id'] . '</td>';
+						echo '<td class="cust_db_nome">'. $row['clien_nome'] . '</td>';
+						echo '<td class="cust_db_email">'. $row['clien_email'] . '</td>';
+						echo '<td class="cust_db_telefone">'. $row['clien_telefone'] . '</td>';
 						echo '<td>'. "." . '</td>';
-						echo '<td><a class="btn" href="read.php?id='.$row['id'].'">Read</a></td>';
+						echo '<td>
+								<table style="width:100%;">
+								<tr>
+									<td align="center">
+					                	<button type="button" class="btn btn-default btn-customer-edit" data-toggle="tooltip" data-placement="top" title="Editar Cliente" rel="tooltip"><i class="glyphicon glyphicon-edit"></i></button>
+					                </td>
+					                <td align="center">
+					                	<button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default btn-customer-delete" type="button" data-original-title="Remover cliente" rel="tooltip"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					                </td>
+				                </tr>
+				                </table>
+							  </td>';
 						echo '</tr>';
 			   }
 			   Database::disconnect();

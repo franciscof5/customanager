@@ -31,7 +31,7 @@ Developed using follow tutorials:
 
 http://www.startutorial.com/articles/view/php-crud-tutorial-part-1
 
-http://webdevacademy.com.br/tutoriais/crud-com-bootstrap-3-parte2/
+http://webdevacademy.com.br/tutoriais/crud-com-bootstrap-3-parte2/ - https://github.com/ruancarvalho
 
 http://www.codingcage.com/2015/04/php-pdo-crud-tutorial-using-oop-with.html
 
