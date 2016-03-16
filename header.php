@@ -84,7 +84,7 @@ if(preg_match('/1049/',$pdo)) {
 			create table orders (pedido_numero int not null auto_increment, pedido_prod_id int, pedido_clien_id int, primary key(pedido_numero));
 			';
 	var_dump($pdo->query($sql));*/
-	
+
 }
 
 

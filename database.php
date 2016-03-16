@@ -4,7 +4,7 @@ class Database
     private static $dbName = 'customanager' ;
     private static $dbHost = 'localhost' ;
     private static $dbUsername = 'root';
-    private static $dbUserPassword = 'PI73uZ6KOOLy';
+    private static $dbUserPassword = 'teste123';
      
     private static $cont  = null;
      
