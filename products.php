@@ -1,6 +1,5 @@
-
-
-	<?php
+<?php
+@include("header.php");
 		
  
 		    if ( !empty($_POST)) {
