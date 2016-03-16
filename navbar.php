@@ -15,7 +15,7 @@
    <ul class="nav navbar-nav navbar-right">
     <li><a href="customers.php">CLIENTES</a></li>
     <li><a href="products.php">PRODUTOS</a></li>
-    <li><a href="orders.php">PEDIDOS</a></li>
+    <!--li><a href="orders.php" disabled="true">PEDIDOS</a></li-->
     <li><a href="help.php">AJUDA</a></li>N
    </ul>
   </div>
