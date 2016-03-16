@@ -8,15 +8,15 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
    </button>
-   <a class="navbar-brand" href="#">Teste 1</a>
+   <a class="navbar-brand" href="#">CUSTOMANAGER</a>
   </div>
 
   <div id="navbar" class="navbar-collapse collapse">
    <ul class="nav navbar-nav navbar-right">
-    <li><a href="clientes.php">Clientes</a></li>
-    <li><a href="produtos.php">Produtos</a></li>
-    <li><a href="pedidos.php">Pedidos</a></li>
-    <li><a href="ajuda.php">Ajuda</a></li>N
+    <li><a href="customers.php">CLIENTES</a></li>
+    <li><a href="products.php">PRODUTOS</a></li>
+    <li><a href="orders.php">PEDIDOS</a></li>
+    <li><a href="help.php">AJUDA</a></li>N
    </ul>
   </div>
 
