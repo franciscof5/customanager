@@ -12,5 +12,5 @@
 <div class="container" style="padding-top:80px;">
 
 <?php
-	include "navbar.php";
+	@include("navbar.php");
 ?>

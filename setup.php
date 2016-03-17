@@ -1,10 +1,6 @@
 <?php
 	@include("header.php");
 ?>
- 
-<?php
-	include "navbar.php";
-?>
 
 <h4>INSTALAÇÃO DO SISTEMA</h4>
 <?php

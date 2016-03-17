@@ -9,9 +9,9 @@
         $mobileError = null;
          
         // keep track post values
-        $name = strip_tags($_POST['name']);
-        $descricao = strip_tags($_POST['desc']);
-        $preco = strip_tags($_POST['price']);
+        $name = trim($_POST['name']);
+        $descricao = trim($_POST['desc']);
+        $preco = trim($_POST['price']);
         
         // validate input
         $valid = true;
