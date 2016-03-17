@@ -1,63 +1,73 @@
 <?php
+	include "database.php";
+		
+    if ( !empty($_POST)) {
+    	
+        // keep track validation errors
+        $nameError = null;
+        $emailError = null;
+        $mobileError = null;
+         
+        // keep track post values
+        $name = strip_tags($_POST['name']);
+        $email = strip_tags($_POST['email']);
+        $mobile = strip_tags($_POST['mobile']);
+         
+        // validate input
+        $valid = true;
+        if (empty($name)) {
+            $nameError = 'Por favor coloque um nome';//'Please enter Name';
+            $valid = false;
+        }
+         
+        if (empty($email)) {
+            $emailError = 'Por favor preencha o email';//'Please enter Email Address';
+            $valid = false;
+        } else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
+            $emailError = 'Por favor preencha o email corretamente';//'Please enter a valid Email Address';
+            $valid = false;
+        }
+         
+        if (empty($mobile)) {
+            $mobileError = 'Por favor informar telefone';//'Please enter Mobile Number';
+            $valid = false;
+        }
+         
+        // insert data
+        if ($valid) {
+        	
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO customers (clien_nome,clien_email,clien_telefone) values(?, ?, ?)";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($name,$email,$mobile));
+            Database::disconnect();
+            //            
+            {
+		       header( 'HTTP/1.1 303 See Other' );
+		       header( 'Location: customers.php?message=success' );
+		       exit();
+		    }
+        } else {
+        	echo '<div class="alert alert-danger">
+				  <strong>Erro:</strong> '.$nameError.' '.$emailError.' '.$mobileError.'
+				</div>';
+        }
+    }
+?>
+	
+<?php
 @include("header.php");
 ?>
- 
 	
 	<?php
-		
-		    if ( !empty($_POST)) {
-		    	
-		        // keep track validation errors
-		        $nameError = null;
-		        $emailError = null;
-		        $mobileError = null;
-		         
-		        // keep track post values
-		        $name = strip_tags($_POST['name']);
-		        $email = strip_tags($_POST['email']);
-		        $mobile = strip_tags($_POST['mobile']);
-		         
-		        // validate input
-		        $valid = true;
-		        if (empty($name)) {
-		            $nameError = 'Por favor coloque um nome';//'Please enter Name';
-		            $valid = false;
-		        }
-		         
-		        if (empty($email)) {
-		            $emailError = 'Por favor preencha o email';//'Please enter Email Address';
-		            $valid = false;
-		        } else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-		            $emailError = 'Por favor preencha o email corretamente';//'Please enter a valid Email Address';
-		            $valid = false;
-		        }
-		         
-		        if (empty($mobile)) {
-		            $mobileError = 'Por favor informar telefone';//'Please enter Mobile Number';
-		            $valid = false;
-		        }
-		         
-		        // insert data
-		        if ($valid) {
-		        	echo '<div class="alert alert-success">
-  							<strong>Sucesso!</strong> Cliente '.$name.' adicionado no banco de dados.
-						</div>';
-		            $pdo = Database::connect();
-		            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		            $sql = "INSERT INTO customers (clien_nome,clien_email,clien_telefone) values(?, ?, ?)";
-		            $q = $pdo->prepare($sql);
-		            $q->execute(array($name,$email,$mobile));
-		            Database::disconnect();
-		            //header("Location: index.php");
-		        } else {
-		        	echo '<div class="alert alert-danger">
-						  <strong>Erro:</strong> '.$nameError.' '.$emailError.' '.$mobileError.'
-						</div>';
-		        }
-		    }
+	if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' )
+	{
+		echo '<div class="alert alert-success">
+						<strong>Sucesso!</strong> Cliente '.$name.' adicionado no banco de dados.
+				</div>';
+	}
 	?>
-	
-	
 	<script type="text/javascript">
 		jQuery( document ).ready(function($) {
 			$( "#row-adc" ).hide();

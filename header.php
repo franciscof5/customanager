@@ -12,7 +12,6 @@
 <div class="container" style="padding-top:80px;">
 
 <?php
-	include "database.php";
 	include "navbar.php";
 
 $pdo = Database::connect();

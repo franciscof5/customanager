@@ -1,57 +1,70 @@
 <?php
-@include("header.php");
-		
- 
-		    if ( !empty($_POST)) {
-		    	
-		        // keep track validation errors
-		        $nameError = null;
-		        $emailError = null;
-		        $mobileError = null;
-		         
-		        // keep track post values
-		        $name = strip_tags($_POST['name']);
-		        $descricao = strip_tags($_POST['desc']);
-		        $preco = strip_tags($_POST['price']);
-		         
-		        // validate input
-		        $valid = true;
-		        if (empty($name)) {
-		            $nameError = 'Por favor coloque um nome';//'Please enter Name';
-		            $valid = false;
-		        }
-		         
-		        if (empty($descricao)) {
-		            $descricaoError = 'Por favor preencha o email';//'Please enter Email Address';
-		            $valid = false;
-		        }
-		         
-		        if (empty($preco)) {
-		            $precoError = 'Por favor informar o preço';//'Please enter Mobile Number';
-		            $valid = false;
-		        }
-		         
-		        // insert data
-		        if ($valid) {
-		        	echo '<div class="alert alert-success">
-  							<strong>Sucesso!</strong> Produto '.$name.' adicionado no banco de dados.
-						</div>';
-		            $pdo = Database::connect();
-		            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		            $sql = "INSERT INTO products (prod_nome,prod_desc,prod_preco) values(?, ?, ?)";
-		            $q = $pdo->prepare($sql);
-		            $q->execute(array($name,$descricao,$preco));
-		            Database::disconnect();
-		            //header("Location: index.php");
-		        } else {
-		        	echo '<div class="alert alert-danger">
-						  <strong>Erro:</strong> '.$nameError.' '.$descricaoErrorError.' '.$precoError.'
-						</div>';
-		        }
+	include "database.php";
+    
+    if ( !empty($_POST)) {
+    	
+        // keep track validation errors
+        $nameError = null;
+        $emailError = null;
+        $mobileError = null;
+         
+        // keep track post values
+        $name = strip_tags($_POST['name']);
+        $descricao = strip_tags($_POST['desc']);
+        $preco = strip_tags($_POST['price']);
+        
+        // validate input
+        $valid = true;
+        if (empty($name)) {
+            $nameError = 'Por favor coloque um nome';//'Please enter Name';
+            $valid = false;
+        }
+         
+        if (empty($descricao)) {
+            $descricaoError = 'Por favor preencha o email';//'Please enter Email Address';
+            $valid = false;
+        }
+         
+        if (empty($preco)) {
+            $precoError = 'Por favor informar o preço';//'Please enter Mobile Number';
+            $valid = false;
+        }
+         
+        // insert data
+        if ($valid) {
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO products (prod_nome,prod_desc,prod_preco) values(?, ?, ?)";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($name,$descricao,$preco));
+            Database::disconnect();
+            //header("Location: index.php");
+            {
+		       header( 'HTTP/1.1 303 See Other' );
+		       header( 'Location: products.php?message=success' );
+		       exit();
 		    }
+        } else {
+    		echo '<div class="alert alert-danger">
+			  <strong>Erro:</strong> '.$nameError.' '.$descricaoErrorError.' '.$precoError.'
+			</div>';
+        }
+    }
+    
+    //unset($_POST);
+?>
+
+<?php
+@include("header.php");
+?>
+	<?php
+	if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' )
+	{
+		echo '<div class="alert alert-success">
+					<strong>Sucesso!</strong> Produto '.$name.' adicionado no banco de dados.
+				</div>';
+	}
 	?>
-	
-	
 	<script type="text/javascript">
 		jQuery( document ).ready(function($) {
 			$( "#row-adc" ).hide();
@@ -74,9 +87,9 @@
 
 		    //
 		    $(".btn-customer-delete").click(function(){
-		        bootbox.confirm("Tem certeza que deseja remover esse cliente?", function(result) {
+		        bootbox.confirm("Tem certeza que deseja remover esse produto?", function(result) {
 				  if(result) {
-				  	bootbox.alert("Cliente removido com sucesso!"); 
+				  	bootbox.alert("Produto removido com sucesso!"); 
 				  }
 				}); 
 		    });
@@ -123,8 +136,8 @@
 			   <label for="desc">DESCRIÇÃO</label>
 			  	<div class="controls">
                     <input id="input_desc" name="desc" type="text" placeholder="Descrição" value="<?php echo !empty($email)?$email:'';?>">
-                    <?php if (!empty($emailError)): ?>
-                        <span class="help-inline"><?php echo $emailError;?></span>
+                    <?php if (!empty($descricaoError)): ?>
+                        <span class="help-inline"><?php echo $descricaoError;?></span>
                     <?php endif;?>
                 </div>
 			 </div>
@@ -167,7 +180,7 @@
 						echo '<tr>';
 						echo '<td class="cust_db_id">'. $row['prod_id'] . '</td>';
 						echo '<td class="cust_db_nome">'. $row['prod_nome'] . '</td>';
-						echo '<td class="cust_db_email">'. $row['prod_descricao'] . '</td>';
+						echo '<td class="cust_db_email">'. $row['prod_desc'] . '</td>';
 						echo '<td class="cust_db_telefone">'. $row['prod_preco'] . '</td>';
 						echo '<td>'. "." . '</td>';
 						echo '<td>
