@@ -13,9 +13,9 @@
 		        $mobileError = null;
 		         
 		        // keep track post values
-		        $name = $_POST['name'];
-		        $email = $_POST['email'];
-		        $mobile = $_POST['mobile'];
+		        $name = strip_tags($_POST['name']);
+		        $email = strip_tags($_POST['email']);
+		        $mobile = strip_tags($_POST['mobile']);
 		         
 		        // validate input
 		        $valid = true;
