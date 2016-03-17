@@ -205,10 +205,8 @@
 			  </tbody>
 			</table>
 		</div>
-	</div> <!-- /container -->
 
-	<?php
-		@include("footer.php");
-	?>
-  </body>
-</html>
+<?php
+	@include("footer.php");
+?>
+  
