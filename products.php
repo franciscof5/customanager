@@ -65,90 +65,32 @@
 				</div>';
 	}
 	?>
-	<script type="text/javascript">
-		jQuery( document ).ready(function($) {
-			$( "#row-adc" ).hide();
-			$( "#adc-btn" ).click(function() {
-			 $(this).text(function(i, text){
-		          return text === "ADICIONAR PRODUTO" ? "CANCELAR" : "ADICIONAR PRODUTO";
-		      });
-			 
-			 //btn-success
-				$( "#row-adc" ).slideToggle( "slow", function() {
-				    // Animation complete.
-				    $ ( "#input_name" ).val("");
-		    		$ ( "#input_descricao" ).val("");
-		    		$ ( "#input_preco" ).val("");
-				});
-
-			});
-
-		    $("[rel='tooltip']").tooltip();
-
-		    //
-		    $(".btn-customer-delete").click(function(){
-		        bootbox.confirm("Tem certeza que deseja remover esse produto?", function(result) {
-				  if(result) {
-				  	bootbox.alert("Produto removido com sucesso!"); 
-				  }
-				}); 
-		    });
-		    $(".btn-customer-edit").click(function(){
-		    	var nomedb = $(this).parent().parent().parent().parent().parent().parent().find(".prod_db_nome").text();
-		    	var emaildb = $(this).parent().parent().parent().parent().parent().parent().find(".prod_db_preco").text();
-		    	var telefonedb = $(this).parent().parent().parent().parent().parent().parent().find(".prod_db_telefone").text();
-		    	$( "#row-adc" ).slideDown( "slow", function() {
-		    		$ ( "#input_name" ).val(nomedb);
-		    		$ ( "#input_email" ).val(emaildb);
-		    		$ ( "#input_mobile" ).val(telefonedb);
-		    	});
-
-		    	//if(("#adc-btn" ).text!="CANCELAR")
-		    	//$("#adc-btn" ).text="CANCELAR";
-		    		
-		    	$( "#adc-btn" ).text(function(i, text){
-		          return "CANCELAR";
-		      	});
-		    });
-		});
-	</script>
-
-	
 		<div class="row">
 			<h4 class="pull-left">PRODUTOS</h4>
-			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR PRODUTO</btn></p>
+			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR</btn></p>
 		</div>
 		
 		<div class="row" id="row-adc" style="background-color:#EEE; padding:10px 10px;">
-			<form class="form-horizontal" action="products.php" method="post">
+			<form class="form-horizontal need-validation" action="products.php" method="post">
 
 			 <div class="form-group col-md-4">
 			   <label for="name">NOME</label>
 			   <div class="controls">
-                    <input id="input_name" name="name" type="text"  placeholder="Nome" value="<?php echo !empty($name)?$name:'';?>">
-                    <?php if (!empty($nameError)): ?>
-                        <span class="help-inline"><?php echo $nameError;?></span>
-                    <?php endif; ?>
+                    <input id="input_name" name="name" type="text"  placeholder="Nome do produto" value="<?php echo !empty($name)?$name:'';?>"  required="" >
                 </div>
 			 </div>
 			 
 			 <div class="form-group col-md-4">
 			   <label for="desc">DESCRIÇÃO</label>
 			  	<div class="controls">
-                    <input id="input_desc" name="desc" type="text" placeholder="Descrição" value="<?php echo !empty($email)?$email:'';?>">
-                    <?php if (!empty($descricaoError)): ?>
-                        <span class="help-inline"><?php echo $descricaoError;?></span>
-                    <?php endif;?>
+                    <input id="input_desc" name="desc" type="text" placeholder="Descrição curta" value="<?php echo !empty($email)?$email:'';?>" required="" >
                 </div>
 			 </div>
 			 
 			 <div class="form-group col-md-4">
 			   <label for="price">PREÇO</label>
 			   <div class="controls">
-                    <input id="input_price" name="price" type="text"  placeholder="Preço" value="<?php echo !empty($mobile)?$mobile:'';?>">
-                    <?php if (!empty($mobileError)): ?>
-                        <span class="help-inline"><?php echo $mobileError;?></span>
-                    <?php endif;?>
+                    <input id="input_price" name="price" type="text"  placeholder="Preço" value="<?php echo !empty($mobile)?$mobile:'';?>" required="" >
                 </div>
 			 </div>
 
@@ -158,6 +100,7 @@
                 </div>
             </form>
 		</div>
+
 		<div class="row">
 			
 			<table class="table table-striped table-bordered">

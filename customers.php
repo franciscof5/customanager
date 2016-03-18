@@ -68,90 +68,33 @@
 				</div>';
 	}
 	?>
-	<script type="text/javascript">
-		jQuery( document ).ready(function($) {
-			$( "#row-adc" ).hide();
-			$( "#adc-btn" ).click(function() {
-			 $(this).text(function(i, text){
-		          return text === "ADICIONAR CLIENTE" ? "CANCELAR" : "ADICIONAR CLIENTE";
-		      });
-			 
-			 //btn-success
-				$( "#row-adc" ).slideToggle( "slow", function() {
-				    // Animation complete.
-				    $ ( "#input_name" ).val("");
-		    		$ ( "#input_email" ).val("");
-		    		$ ( "#input_mobile" ).val("");
-				});
-
-			});
-
-		    $("[rel='tooltip']").tooltip();
-
-		    //
-		    $(".btn-customer-delete").click(function(){
-		        bootbox.confirm("Tem certeza que deseja remover esse cliente?", function(result) {
-				  if(result) {
-				  	bootbox.alert("Cliente removido com sucesso!"); 
-				  }
-				}); 
-		    });
-		    $(".btn-customer-edit").click(function(){
-		    	var nomedb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_nome").text();
-		    	var emaildb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_email").text();
-		    	var telefonedb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_telefone").text();
-		    	$( "#row-adc" ).slideDown( "slow", function() {
-		    		$ ( "#input_name" ).val(nomedb);
-		    		$ ( "#input_email" ).val(emaildb);
-		    		$ ( "#input_mobile" ).val(telefonedb);
-		    	});
-
-		    	//if(("#adc-btn" ).text!="CANCELAR")
-		    	//$("#adc-btn" ).text="CANCELAR";
-		    		
-		    	$( "#adc-btn" ).text(function(i, text){
-		          return "CANCELAR";
-		      	});
-		    });
-		});
-	</script>
-
 	
 		<div class="row">
 			<h4 class="pull-left">CLIENTES</h4>
-			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR CLIENTE</btn></p>
+			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR</btn></p>
 		</div>
 		
 		<div class="row" id="row-adc" style="background-color:#EEE; padding:10px 10px;">
-			<form class="form-horizontal" action="customers.php" method="post">
+			<form class="form-horizontal need-validation" action="customers.php" method="post">
 
 			 <div class="form-group col-md-4">
 			   <label for="name">NOME</label>
 			   <div class="controls">
-                    <input id="input_name" name="name" type="text"  placeholder="Nome" value="<?php echo !empty($name)?$name:'';?>">
-                    <?php if (!empty($nameError)): ?>
-                        <span class="help-inline"><?php echo $nameError;?></span>
-                    <?php endif; ?>
+                    <input id="input_name" name="name" type="text"  placeholder="Nome Completo" value="<?php echo !empty($name)?$name:'';?>" required="" >
                 </div>
 			 </div>
 			 
 			 <div class="form-group col-md-4">
 			   <label for="email">EMAIL</label>
 			  	<div class="controls">
-                    <input id="input_email" name="email" type="text" placeholder="Email" value="<?php echo !empty($email)?$email:'';?>">
-                    <?php if (!empty($emailError)): ?>
-                        <span class="help-inline"><?php echo $emailError;?></span>
-                    <?php endif;?>
+                    <input id="input_email" name="email" type="text" placeholder="email@example.com" value="<?php echo !empty($email)?$email:'';?>" data-parsley-trigger="change" required="" type="email">
                 </div>
 			 </div>
 			 
 			 <div class="form-group col-md-4">
 			   <label for="mobile">TELEFONE</label>
 			   <div class="controls">
-                    <input id="input_mobile" name="mobile" type="text"  placeholder="Telefone" value="<?php echo !empty($mobile)?$mobile:'';?>">
-                    <?php if (!empty($mobileError)): ?>
-                        <span class="help-inline"><?php echo $mobileError;?></span>
-                    <?php endif;?>
+                    <input id="input_mobile" name="mobile" type="text"  placeholder="(00) 000 000 000" value="<?php echo !empty($mobile)?$mobile:'';?>" required="" >
                 </div>
 			 </div>
 
@@ -178,7 +121,7 @@
 			  <?php
 			   
 			   $pdo = Database::connect();
-			   $sql = 'SELECT * FROM customers ';
+			   $sql = 'SELECT * FROM customers LIMIT 10';
 			   foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td class="cust_db_id">'. $row['clien_id'] . '</td>';
