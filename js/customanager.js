@@ -18,7 +18,7 @@ jQuery( document ).ready(function($) {
 	   //var $this = $(this);
 	   //$this.editable('data.php', {
 	   $(this).editable('data.php', {
-		submitdata  : { property_name : $(this).parent().prop('className') },
+		submitdata  : { property_name : $(this).parent().prop('className'), ajaxcommand : "single_edit" },
         indicator : 'salvando...',
         width: "50%",
         tooltip   : 'clique para editar...',

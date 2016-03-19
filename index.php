@@ -6,8 +6,7 @@
 	include "navbar.php";
 ?>
 
-		<h4>Acesso restrito</h4>
-		<p>Favor colocar usuário e senha</p>
+		<h4>Bem vindo ao sistema CUSTOMANAGER</h4>
 
 <?php
 	@include("footer.php");

@@ -1,5 +1,5 @@
 <?php
-	include "database.php";
+	/*include "database.php";
     
     if ( !empty($_POST)) {
     	
@@ -49,29 +49,22 @@
 			  <strong>Erro:</strong> '.$nameError.' '.$descricaoErrorError.' '.$precoError.'
 			</div>';
         }
-    }
+    }*/
     
     //unset($_POST);
 ?>
 
 <?php
-@include("header.php");
+	@include("header.php");
 ?>
-	<?php
-	if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' )
-	{
-		echo '<div class="alert alert-success">
-					<strong>Sucesso!</strong> Produto '.$name.' adicionado no banco de dados.
-				</div>';
-	}
-	?>
 		<div class="row">
 			<h4 class="pull-left">PRODUTOS</h4>
 			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR</btn></p>
 		</div>
 		
 		<div class="row" id="row-adc" style="background-color:#EEE; padding:10px 10px;">
-			<form class="form-horizontal need-validation" action="products.php" method="post">
+			<form class="form-horizontal need-validation" action="data.php" method="post">
+			 <input type="hidden" name="ajaxcommand" value="add-product">
 
 			 <div class="form-group col-md-4">
 			   <label for="name">NOME</label>
@@ -116,7 +109,7 @@
 			  </thead>
 			  <tbody>
 			  <?php
-			   
+			   include "database.php";
 			   $pdo = Database::connect();
 			   $sql = 'SELECT * FROM products ';
 			   foreach ($pdo->query($sql) as $row) {

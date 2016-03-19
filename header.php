@@ -25,6 +25,14 @@
 	</head>
 <body>
 
+<?php
+if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' ) {
+	echo '<script>$.growl.notice({ title: "Sucesso", message: "Operação realizada com sucesso!", location : "br" });</script>';
+} elseif ($_GET[ 'message' ] == 'error' ) {
+	echo '<script>$.growl.error({ title: "Erro", message: "Erro ao executar operação!", location : "br" });</script>';
+};
+?>
+
 	<div class="container" style="padding-top:80px;">
 
 	<?php

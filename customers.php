@@ -1,82 +1,14 @@
 <?php
-	include "database.php";
-		
-    if ( !empty($_POST)) {
-    	
-        // keep track validation errors
-        $nameError = null;
-        $emailError = null;
-        $mobileError = null;
-         
-        // keep track post values
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $mobile = trim($_POST['mobile']);
-         
-        // validate input
-        $valid = true;
-        if (empty($name)) {
-            $nameError = 'Por favor coloque um nome';//'Please enter Name';
-            $valid = false;
-        }
-         
-        if (empty($email)) {
-            $emailError = 'Por favor preencha o email';//'Please enter Email Address';
-            $valid = false;
-        } else if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-            $emailError = 'Por favor preencha o email corretamente';//'Please enter a valid Email Address';
-            $valid = false;
-        }
-         
-        if (empty($mobile)) {
-            $mobileError = 'Por favor informar telefone';//'Please enter Mobile Number';
-            $valid = false;
-        }
-         
-        // insert data
-        if ($valid) {
-        	
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO customers (clien_nome,clien_email,clien_telefone) values(?, ?, ?)";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($name,$email,$mobile));
-            Database::disconnect();
-            //            
-            {
-		       header( 'HTTP/1.1 303 See Other' );
-		       header( 'Location: customers.php?message=success' );
-		       exit();
-		    }
-        } else {
-        	echo '<div class="alert alert-danger">
-				  <strong>Erro:</strong> '.$nameError.' '.$emailError.' '.$mobileError.'
-				</div>';
-        }
-    }
-?>
-	
-<?php
-@include("header.php");
-?>
-	
-	<?php
-	if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' )
-	{
-		echo '<div class="alert alert-success">
-					<strong>Sucesso!</strong> Cliente '.$name.' adicionado no banco de dados.
-			</div>';
-	}
-	?>
-	
+	@include("header.php");
+?>	
 		<div class="row">
 			<h4 class="pull-left">CLIENTES</h4>
 			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR</btn></p>
 		</div>
 		
 		<div class="row" id="row-adc" style="background-color:#EEE; padding:10px 10px;">
-			<form class="form-horizontal need-validation" action="customers.php" method="post">
-
+			<form class="form-horizontal need-validation" action="data.php" method="post">
+			 <input type="hidden" name="ajaxcommand" value="add-costumer">
 			 <div class="form-group col-md-4">
 			   <label for="name">NOME</label>
 			   <div class="controls">
@@ -119,7 +51,7 @@
 			  </thead>
 			  <tbody>
 			  <?php
-			   
+			   include "database.php";
 			   $pdo = Database::connect();
 			   $sql = 'SELECT * FROM customers LIMIT 10';
 			   foreach ($pdo->query($sql) as $row) {
