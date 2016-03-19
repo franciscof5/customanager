@@ -64,8 +64,8 @@
 	if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' )
 	{
 		echo '<div class="alert alert-success">
-						<strong>Sucesso!</strong> Cliente '.$name.' adicionado no banco de dados.
-				</div>';
+					<strong>Sucesso!</strong> Cliente '.$name.' adicionado no banco de dados.
+			</div>';
 	}
 	?>
 	
@@ -114,7 +114,7 @@
 				  <th>EMAIL</th>
 				  <th>TELEFONE</th>
 				  <th>PEDIDOS</th>
-				  <th>AÇÕES</th>
+				  <th>REMOVER</th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -125,22 +125,11 @@
 			   foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td class="cust_db_id">'. $row['clien_id'] . '</td>';
-						echo '<td class="cust_db_nome">'. $row['clien_nome'] . '</td>';
-						echo '<td class="cust_db_email">'. $row['clien_email'] . '</td>';
-						echo '<td class="cust_db_telefone">'. $row['clien_telefone'] . '</td>';
+						echo '<td class="cust_db_nome"><span class="edit" id="1">'. $row['clien_nome'] . '</span></td>';
+						echo '<td class="cust_db_email"><span class="edit">'. $row['clien_email'] . '</span></td>';
+						echo '<td class="cust_db_telefone"><span class="edit">'. $row['clien_telefone'] . '</span></td>';
 						echo '<td>'. "." . '</td>';
-						echo '<td>
-								<table style="width:100%;">
-								<tr>
-									<td align="center">
-					                	<button type="button" class="btn btn-default btn-customer-edit" data-toggle="tooltip" data-placement="top" title="EDITAR CLIENTE" rel="tooltip"><i class="glyphicon glyphicon-edit"></i></button>
-					                </td>
-					                <td align="center">
-					                	<button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default btn-customer-delete" type="button" data-original-title="REMOVER CLIENTE" rel="tooltip"><i class="glyphicon glyphicon-remove-circle"></i></button>
-					                </td>
-				                </tr>
-				                </table>
-							  </td>';
+						echo '<td><button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default btn-customer-delete" type="button" data-original-title="REMOVER CLIENTE" rel="tooltip"><i class="glyphicon glyphicon-remove-circle"></i></button></td>';
 						echo '</tr>';
 			   }
 			   Database::disconnect();

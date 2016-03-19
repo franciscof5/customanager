@@ -111,7 +111,7 @@
 				  <th>DESCRIÇÃO</th>
 				  <th>PREÇO</th>
 				  <th>PEDIDOS</th>
-				  <th>AÇÕES</th>
+				  <th>REMOVER</th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -122,22 +122,11 @@
 			   foreach ($pdo->query($sql) as $row) {
 						echo '<tr>';
 						echo '<td class="cust_db_id">'. $row['prod_id'] . '</td>';
-						echo '<td class="cust_db_nome">'. $row['prod_nome'] . '</td>';
-						echo '<td class="cust_db_email">'. $row['prod_desc'] . '</td>';
-						echo '<td class="cust_db_telefone">'. $row['prod_preco'] . '</td>';
+						echo '<td class="cust_db_nome"><span class="edit">'. $row['prod_nome'] . '</span></td>';
+						echo '<td class="cust_db_email"><span class="edit">'. $row['prod_desc'] . '</span></td>';
+						echo '<td class="cust_db_telefone maskpreco"><span class="edit">'. $row['prod_preco'] . '</span></td>';
 						echo '<td>'. "." . '</td>';
-						echo '<td>
-								<table style="width:100%;">
-								<tr>
-									<td align="center">
-					                	<button type="button" class="btn btn-default btn-customer-edit" data-toggle="tooltip" data-placement="top" title="EDITAR PRODUTO" rel="tooltip"><i class="glyphicon glyphicon-edit"></i></button>
-					                </td>
-					                <td align="center">
-					                	<button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default btn-customer-delete" type="button" data-original-title="REMOVER PRODUTO" rel="tooltip"><i class="glyphicon glyphicon-remove-circle"></i></button>
-					                </td>
-				                </tr>
-				                </table>
-							  </td>';
+						echo '<td><button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default btn-customer-delete" type="button" data-original-title="REMOVER PRODUTO" rel="tooltip"><i class="glyphicon glyphicon-remove-circle"></i></button></td>';
 						echo '</tr>';
 			   }
 			   Database::disconnect();
