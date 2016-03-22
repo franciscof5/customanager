@@ -53,7 +53,7 @@
 			  </thead>
 			  <tbody>
 			  <?php
-			   include "database.php";
+			   //include "database.php";
 			   $pdo = Database::connect();
 			   $sql = 'SELECT * FROM products ';
 			   foreach ($pdo->query($sql) as $row) {

@@ -1,6 +1,6 @@
 <?php @include("header.php"); ?>
  
-<?php include "navbar.php"; ?>
+<?php @include("navbar.php"); ?>
 
 <div id="main" class="row col-md-10 col-md-offset-1">
 		<h4>Bem vindo ao sistema CUSTOMANAGER</h4>

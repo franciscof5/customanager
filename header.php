@@ -1,3 +1,14 @@
+<?php
+
+include "database.php";
+$pdo = Database::connect();
+if(preg_match('/1049/',$pdo)) {
+	global $n_instalado;
+	$n_instalado = true;
+	header( 'Location: setup.php');
+}
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>

@@ -13,11 +13,14 @@
 
   <div id="navbar" class="navbar-collapse collapse">
    <ul class="nav navbar-nav navbar-right">
-    <li><a href="customers.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> CLIENTES</a></li>
-    <li><a href="products.php"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> PRODUTOS</a></li>
-    <!--li><a href="orders.php" disabled="true">PEDIDOS</a></li-->
+    <?php global $n_instalado; if($n_instalado) { ?>
+      <li><a href="setup.php"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> SETUP</a></li>
+    <?php } else { ?>
+      <li><a href="customers.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> CLIENTES</a></li>
+      <li><a href="products.php"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> PRODUTOS</a></li>
+      <!--li><a href="orders.php" disabled="true">PEDIDOS</a></li-->
+    <?php }  ?>
     <li><a href="help.php"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> AJUDA</a></li>
-    <li><a href="setup.php"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> SETUP</a></li>
    </ul>
   </div>
 
