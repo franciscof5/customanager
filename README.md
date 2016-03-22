@@ -10,8 +10,9 @@ Locale: Itapetininga, Sao Paulo
 
 Data: 16/03/2016
 
-Site: www.franciscomat.com | www.franciscomat.com.br
+Site: http://franciscomat.com | http://franciscomat.com.br
 
+Live-demo: http://franciscomat.com/customanager-demo/
 
 ====
 
