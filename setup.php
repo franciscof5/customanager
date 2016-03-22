@@ -1,6 +1,8 @@
-<?php
-	@include("header.php");
-?>
+<?php @include("header.php"); ?>
+ 
+<?php include "navbar.php"; ?>
+
+<div id="main" class="row col-md-10 col-md-offset-1">
 
 <h4>INSTALAÇÃO DO SISTEMA</h4>
 <?php
@@ -66,7 +68,6 @@ if(preg_match('/1049/',$pdo)) {
 }
 ?>
 
-<?php
-	@include("footer.php");
-?>
+</div>
+<?php @include("footer.php"); ?>
   

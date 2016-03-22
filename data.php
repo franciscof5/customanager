@@ -1,10 +1,29 @@
 <?php
 include "database.php";
+
 if ( !empty($_POST)) {
 	if($_POST["ajaxcommand"]=="single_edit") {
 		echo $_POST["value"];
 		die;
-	} elseif ($_POST["ajaxcommand"]=="add-costumer") {
+	} elseif ($_POST["ajaxcommand"]=="delete") {
+        // keep track post values
+        $id = $_POST['id'];
+        
+        //
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "DELETE FROM customers WHERE clien_id ='".$id."'";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($id));
+        
+        Database::disconnect();
+        
+        if($q)
+            echo "sucesso";
+        else
+            echo "error";
+        die;
+    } elseif ($_POST["ajaxcommand"]=="add-costumer") {
         // keep track post values
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);

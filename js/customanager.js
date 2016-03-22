@@ -1,15 +1,18 @@
 jQuery( document ).ready(function($) {
-	//
+	
+	//Form validation
 	$('.need-validation').parsley().on('field:validated', function() {
 		var ok = $('.parsley-error').length === 0;
 		$('.bs-callout-info').toggleClass('hidden', !ok);
 		$('.bs-callout-warning').toggleClass('hidden', ok);
 	});
-	//
+	
+	//Masks for inputs
 	$('#input_mobile').mask('(00) 000 000 000');
 	$('.maskfone').mask('(00) 000 000 000');	
 	$('#input_price').mask('000.000.000.000.000,00', {reverse: true});
 	$('.maskpreco').mask('000.000.000.000.000,00', {reverse: true});
+	
 	//
 	/*$('.edit').each(function() {
 
@@ -54,13 +57,19 @@ jQuery( document ).ready(function($) {
 	});
 
     //
-    $(".btn-customer-delete").click(function(){
-        bootbox.confirm("Tem certeza que deseja remover?", function(result) {
-		  if(result) {
-		  	$.growl.notice({ title: "Sucesso", message: "Removido do banco de dados com sucesso!", location : "br" });
-		  }
-		});
-		$(this).a
+
+    $(".btn-customer-delete").click(function() {
+    	var id_db = $(this).parent().parent().find(".cust_db_id").text();
+    	var name_db = $(this).parent().parent().find(".cust_db_nome").text();
+    	var line_table = $(this).parent().parent();
+        bootbox.confirm("Tem certeza que deseja remover "+ name_db + "?", function(result) {
+        	$.growl({ title: "Deletando...", message: "enviando comando para deletar...", location : "br" });
+        	$.post( "data.php", { id: id_db, ajaxcommand: "delete" })
+				.done(function( data ) {
+				    $.growl.notice({ title: "Sucesso", message: "Removido do banco de dados com sucesso!", location : "br" });
+				    line_table.remove();
+				});
+		});	
     });
 
     $(".btn-customer-edit").click(function(){

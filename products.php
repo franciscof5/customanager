@@ -1,59 +1,3 @@
-<?php
-	/*include "database.php";
-    
-    if ( !empty($_POST)) {
-    	
-        // keep track validation errors
-        $nameError = null;
-        $emailError = null;
-        $mobileError = null;
-         
-        // keep track post values
-        $name = trim($_POST['name']);
-        $descricao = trim($_POST['desc']);
-        $preco = trim($_POST['price']);
-        
-        // validate input
-        $valid = true;
-        if (empty($name)) {
-            $nameError = 'Por favor coloque um nome';//'Please enter Name';
-            $valid = false;
-        }
-         
-        if (empty($descricao)) {
-            $descricaoError = 'Por favor preencha o email';//'Please enter Email Address';
-            $valid = false;
-        }
-         
-        if (empty($preco)) {
-            $precoError = 'Por favor informar o preço';//'Please enter Mobile Number';
-            $valid = false;
-        }
-         
-        // insert data
-        if ($valid) {
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO products (prod_nome,prod_desc,prod_preco) values(?, ?, ?)";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($name,$descricao,$preco));
-            Database::disconnect();
-            //header("Location: index.php");
-            {
-		       header( 'HTTP/1.1 303 See Other' );
-		       header( 'Location: products.php?message=success' );
-		       exit();
-		    }
-        } else {
-    		echo '<div class="alert alert-danger">
-			  <strong>Erro:</strong> '.$nameError.' '.$descricaoErrorError.' '.$precoError.'
-			</div>';
-        }
-    }*/
-    
-    //unset($_POST);
-?>
-
 <?php @include("header.php"); ?>
 
 	<div id="main" class="row col-md-10 col-md-offset-1">
@@ -150,7 +94,6 @@
 			</nav>
 		</div>
 	</div>
-<?php
-	@include("footer.php");
-?>
+
+<?php @include("footer.php"); ?>
   
