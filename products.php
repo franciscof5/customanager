@@ -54,9 +54,9 @@
     //unset($_POST);
 ?>
 
-<?php
-	@include("header.php");
-?>
+<?php @include("header.php"); ?>
+
+	<div id="main" class="row col-md-10 col-md-offset-1">
 		<div class="row">
 			<h4 class="pull-left">PRODUTOS</h4>
 			<p class="text-right"><btn class="btn-sm btn-primary text-right" id="adc-btn" style="cursor: pointer;">ADICIONAR</btn></p>
@@ -127,7 +127,29 @@
 			  </tbody>
 			</table>
 		</div>
-
+		
+		<div class="row">
+			<nav>
+			  <ul class="pagination">
+			    <li>
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+	</div>
 <?php
 	@include("footer.php");
 ?>

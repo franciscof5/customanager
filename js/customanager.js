@@ -29,10 +29,7 @@ jQuery( document ).ready(function($) {
         }
 		});
 	 });
-	/*$('.edit')
-     });*/
-
-	
+		
 	//
 	$("[rel='tooltip']").tooltip();
 
@@ -62,8 +59,10 @@ jQuery( document ).ready(function($) {
 		  if(result) {
 		  	$.growl.notice({ title: "Sucesso", message: "Removido do banco de dados com sucesso!", location : "br" });
 		  }
-		}); 
+		});
+		$(this).a
     });
+
     $(".btn-customer-edit").click(function(){
     	var nomedb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_nome").text();
     	var emaildb = $(this).parent().parent().parent().parent().parent().parent().find(".cust_db_email").text();

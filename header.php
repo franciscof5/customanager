@@ -6,6 +6,7 @@
 		
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/jquery.growl.css" rel="stylesheet">
+		<link href="css/customanager.css" rel="stylesheet">
 
 		<script type="text/javascript" src="js/jquery2.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -33,8 +34,6 @@ if( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == 'success' ) {
 };
 ?>
 
-	<div class="container" style="padding-top:80px;">
+<div class="container" style="padding-top:80px;">
 
-	<?php
-		@include("navbar.php");
-	?>
+	<?php @include("navbar.php"); ?>

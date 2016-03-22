@@ -1,7 +1,7 @@
 CUSTOMANAGER
 ====================
 
-WORDPRESS BOOTSTRAP CUSTOMER, PRODUCTS AND ORDERS MANAGEMENT
+PHP BOOTSTRAP CUSTOMER, PRODUCTS AND ORDERS MANAGEMENT
 
 
 Author: Francisco Matelli Matulovic
@@ -38,11 +38,11 @@ http://www.codingcage.com/2015/04/php-pdo-crud-tutorial-using-oop-with.html
 ====
 Thanks to:
 
-COMUNIDADE PHP
+PHP
 
 GOOGLE
 
-STACK OVERFLOW
+STACKOVERFLOW
 
 TWITTER
 
@@ -77,11 +77,11 @@ http://www.codingcage.com/2015/04/php-pdo-crud-tutorial-using-oop-with.html
 ====
 Agradecimentos:
 
-COMUNIDADE PHP
+PHP
 
 GOOGLE
 
-STACK OVERFLOW
+STACKOVERFLOW
 
 TWITTER
 
